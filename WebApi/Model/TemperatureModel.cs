@@ -18,6 +18,7 @@ namespace WebApi.Model
     /// </summary>
     public class TemperatureModel
     {
+        public decimal temp { get; set; }
         public decimal feels_like { get; set; }
         public decimal temp_min { get; set; }
         public decimal temp_max { get; set; }

@@ -29,13 +29,13 @@ namespace WebApi.Controller
 
         [HttpGet]
         [Route("/temperature")]
-        public IActionResult Temperature(string city)
+        public async Task<IActionResult> Temperature(string city)
         {
             Manager mng = new Manager();
             int number;
             if (int.TryParse(city, out number)) return BadRequest();
 
-            mng.GetWeather(city);
+            await mng.GetWeather(city);
 
             return Ok();
         }
