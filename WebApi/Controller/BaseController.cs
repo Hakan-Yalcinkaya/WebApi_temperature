@@ -23,7 +23,7 @@ namespace WebApi.Controller
             user.Lastname = "Yalçınkaya";
 
 
-            var jsonData = JsonConvert.SerializeObject(user);
+            string jsonData = JsonConvert.SerializeObject(user);
             return Ok(jsonData);
         }
 
@@ -32,9 +32,6 @@ namespace WebApi.Controller
         public async Task<IActionResult> Temperature(string city)
         {
             Manager mng = new Manager();
-            int number;
-            if (int.TryParse(city, out number)) return BadRequest();
-
             await mng.GetWeather(city);
 
             return Ok();
