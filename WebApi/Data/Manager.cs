@@ -24,7 +24,7 @@ namespace WebApi.Data
 
                 JObject json = JObject.Parse(contents);
                 TemperatureModel temperature = JsonConvert.DeserializeObject<TemperatureModel>(json["main"].ToString());
-
+                temperature.temp = temperature.temp - Convert.ToDecimal(273.15);
                 return temperature;
             }
             catch (Exception ex)
