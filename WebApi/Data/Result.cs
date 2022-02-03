@@ -1,12 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Model;
 
 namespace WebApi.Data
 {
-    public class Result<T>
+    public class Result<T> 
         where T : class
     {
         private T dataObject;
@@ -18,7 +20,15 @@ namespace WebApi.Data
 
         public string result()
         {
-            return JsonConvert.SerializeObject(dataObject);
+            if(dataObject != null)
+            {
+                return JsonConvert.SerializeObject(dataObject);
+            }
+
+            ErrorModel error = new ErrorModel();
+            error.message = "Nesne örneği alınamadı!";
+            error.success = false;
+            return JsonConvert.SerializeObject(error);
         }
 
 

@@ -14,27 +14,25 @@ namespace WebApi.Controller
     [ApiController]
     public class BaseController : ControllerBase
     {
+        private readonly Manager manager = new Manager();
 
         [HttpGet]
         public IActionResult Index()
         {
-            UserModel user = new UserModel();
-            user.Firstname = "Hakan";
-            user.Lastname = "Yalçınkaya";
-
-
-            string jsonData = JsonConvert.SerializeObject(user);
-            return Ok(jsonData);
+            Result<UserModel> resultData = new Result<UserModel>(manager.GetUser());
+            var result = resultData.result();
+          
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("/temperature")]
         public async Task<IActionResult> Temperature(string city)
         {
-            Manager mng = new Manager();
-            await mng.GetWeather(city);
+            Result<TemperatureModel> resultData = new Result<TemperatureModel>(await manager.GetWeather(city));
+            var result = resultData.result(); 
 
-            return Ok();
+            return Ok(result);
         }
 
 

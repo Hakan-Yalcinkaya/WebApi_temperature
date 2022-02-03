@@ -37,5 +37,15 @@ namespace WebApi.Data
 
         }
 
+
+        public UserModel GetUser()
+        {
+            UserModel user = new UserModel();
+            user.Firstname = "Hakan";
+            user.Lastname = "Yalçınkaya";
+
+            return user;
+        }
+
     }
 }
